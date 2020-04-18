@@ -1,7 +1,7 @@
 {
   "name": "ffExpHero",
   "version": "1.0.0",
-  "description": "Express王者英雄",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/ffang07/ExpHero/issues"
   },
-  "homepage": "https://github.com/ffang07/ExpHero#readme"
+  "homepage": "https://github.com/ffang07/ExpHero#readme",
+  "dependencies": {
+    "ejs": "^3.0.2",
+    "express": "^4.17.1"
+  }
 }
