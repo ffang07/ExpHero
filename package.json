@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/ffang07/ExpHero#readme",
   "dependencies": {
+    "bootstrap": "^4.4.1",
     "ejs": "^3.0.2",
     "express": "^4.17.1"
   }
