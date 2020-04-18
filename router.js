@@ -1,7 +1,6 @@
-const  express = require('express');
 
-const router = express.Router();
-
+const express=require('express');
+let router=express.Router();
 router.get('/',(req,res)=>{
     res.render('index',{})
 })
@@ -12,7 +11,6 @@ router.get('/',(req,res)=>{
     res.render('edit',{})
 })
 .get('/info',(req,res)=>{
-    res.render('info',{})
+    res.render('view/info',{})
 })
-
 module.exports=router;
