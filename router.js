@@ -1,16 +1,17 @@
 
 const express=require('express');
 let router=express.Router();
+let heroCtrl=require('./controller');
 router.get('/',(req,res)=>{
-    res.render('index',{})
+    heroCtrl.showIndexPage(req,res);
 })
 .get('/add',(req,res)=>{
-    res.render('add',{})
+    heroCtrl.showAddPage(req,res);
 })
 .get('/edit',(req,res)=>{
-    res.render('edit',{})
+    heroCtrl.showEditPage(req,res);
 })
 .get('/info',(req,res)=>{
-    res.render('view/info',{})
+    heroCtrl.showInfoPage(req,res);
 })
 module.exports=router;

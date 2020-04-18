@@ -1,0 +1,14 @@
+module.exports={
+    showIndexPage(req,res){
+        res.render('index',{});
+    },
+    showAddPage(req,res){
+        res.render('Add',{});
+    },
+    showEditPage(req,res){
+        res.render('Edit',{});
+    },
+    showInfoPage(req,res){
+        res.render('/view/info',{});
+    }
+}
