@@ -1,0 +1,20 @@
+{
+  "name": "ffExpHero",
+  "version": "1.0.0",
+  "description": "Express王者英雄",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ffang07/ExpHero.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ffang07/ExpHero/issues"
+  },
+  "homepage": "https://github.com/ffang07/ExpHero#readme"
+}
