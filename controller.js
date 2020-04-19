@@ -1,4 +1,5 @@
 let heroModel=require('./model');
+const moment=require('moment');
 
 module.exports={
     showIndexPage(req,res){
@@ -49,6 +50,14 @@ module.exports={
         heroModel.deleteOneHeroData(id,(result)=>{
             if(!result) return res.json({code:201,msg:'删除失败'})
             res.json({code:200,msg:'删除成功'})
+        })
+    },
+    addOneHeroInfo(req,res){
+        let hero = req.body;
+        hero.ctime = moment().format('YYYY-MM-DD HH:mm:ss')
+        heroModel.addOneHeroData(hero,result=>{
+            if(!result) return res.json({code:201,msg:'添加失败'})
+            res.json({code:200,msg:'添加成功'})
         })
     }
 }

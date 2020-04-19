@@ -42,7 +42,9 @@
 </script>
 <script>
   $(function(){
-    $.ajax({
+    load();
+    function load(){
+      $.ajax({
       type:'get',
       url:'/getAllHeroInfo',
       success:function(res){
@@ -51,19 +53,25 @@
         $('tbody').html(htmlStr);
       }
     })
+    }
+    
     $('tbody').on('click','.btn-del',function(e){
       e.preventDefault();
-      // console.dir($(this));
+      if(confirm('确定要删除吗?')){
+        // console.dir($(this));
       $.get({
         url:'/deleteOneHero',
         data:{id:$(this).data('id')},
         success:function(res){
           console.log(res);
           if(res.code==200){
-            location.reload();
+            // location.reload();
+            load();
           }
         }
       })
+      }
+      
     })
   })
 </script>

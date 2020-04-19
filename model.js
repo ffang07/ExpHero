@@ -4,7 +4,8 @@ let conn=mysql.createConnection({
     host:'127.0.0.1',
     user:'root',
     password:'520AbcAbc',
-    database:'hero'
+    database:'hero',
+    dateStrings: true
 });
 conn.connect();
 module.exports={
@@ -29,6 +30,15 @@ module.exports={
         conn.query(sql,[id],(err,result)=>{
             if (err) return callback(false);
             // console.log(result);
+            callback(true);
+        })
+    },
+    // 添加英雄数据
+    addOneHeroData(hero,callback) {
+        let sql = 'insert into heros set ?'
+        conn.query(sql,[hero],(err,result)=>{
+            console.log(err,result);
+            if(err) return callback(false);
             callback(true);
         })
     }

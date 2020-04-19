@@ -24,4 +24,7 @@ router.get('/',(req,res)=>{
 .get('/deleteOneHero',(req,res)=>{
     heroCtrl.deleteOneHeroInfo(req,res);
 })
+.post('/addOneHero',(req,res)=>{
+    heroCtrl.addOneHeroInfo(req,res);
+})
 module.exports=router;
