@@ -21,8 +21,9 @@ module.exports={
     getOneHeroData(id,callback) {
         let sql = 'select * from heros where id=?;'
         conn.query(sql,[id],(err,sqldata)=>{
-            if(err) return callback(err)
-            callback(null,sqldata)
+            // console.log('打印1:',id,err,sqldata); //sqldata 数组[ 只有一行RowDataPacket{字段:值, ...} ]
+            if(err) return callback(err);
+            callback(null,sqldata);
         })
     },
     deleteOneHeroData(id,callback){
@@ -38,6 +39,16 @@ module.exports={
         let sql = 'insert into heros set ?'
         conn.query(sql,[hero],(err,result)=>{
             console.log(err,result);
+            if(err) return callback(false);
+            callback(true);
+        })
+    },
+    updateHeroData(hero,callback){
+        let {id} = hero;
+        delete hero.id;
+        let sql='update heros set ? where id=?'
+        conn.query(sql,[hero,id],(err,result)=>{
+            // console.log('打印4:',hero,id,err,result);
             if(err) return callback(false);
             callback(true);
         })
