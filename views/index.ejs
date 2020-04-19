@@ -14,20 +14,23 @@
     </div>
   </header>
   <div class="container hero-list">
-    <a class="btn btn-success pull-right" href="">添加英雄</a>
+    <a class="btn btn-success pull-right" href="/add">添加英雄</a>
     <table class="table table-hover">
       <thead>
         <th>编号</th>
         <th>名称</th>
         <th>性别</th>
+        <th>年龄</th>
+        <th>手机号</th>
+        <th>地址</th>
         <th>创建时间</th>
         <th>操作</th>
       </thead>
       <tbody>
         <tr>
-          <td>1</td>
-          <td>墨子</td>
-          <td>男</td>
+          <td>000</td>
+          <td>后端ejs渲染</td>
+          <td>前端不渲染</td>
           <td>2017-12-12 12:12:12</td>
           <td>
             <a href="">查看</a>
@@ -35,50 +38,23 @@
             <a href="">删除</a>
           </td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td>李白</td>
-          <td>男</td>
-          <td>2017-12-12 12:12:12</td>
-          <td>
-            <a href="">查看</a>
-            <a href="">编辑</a>
-            <a href="">删除</a>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>诸葛亮</td>
-          <td>男</td>
-            <td>2017-12-12 12:12:12</td>
+        <!-- 这个页面 挖了ejs坑,后端render渲染好,返回给前端!   可以直接注册事件不用委派-->
+        <% data.forEach((item,index)=>{%>
+          <tr>
+            <td><%= index+1%></td>
+            <td><%= item.name%></td>
+            <td><%= item.gender%></td>
+            <td><%= item.age%></td>
+            <td>后端ejs渲染</td>
+            <td><%= item.address%></td>
+            <td><%= item.ctime%></td>
             <td>
-              <a href="">查看</a>
-              <a href="">编辑</a>
-              <a href="">删除</a>
+              <a href="/info.ejs?id=<%= item.id%>">查看</a>
+              <a href="/edit.ejs?id=<%= item.id%>">编辑</a>
+              <a href="javascript:void(0);" data-id='<%= item.id%>'>删除</a>
             </td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>大乔</td>
-          <td>女</td>
-          <td>2017-12-12 12:12:12</td>
-          <td>
-            <a href="">查看</a>
-            <a href="">编辑</a>
-            <a href="">删除</a>
-          </td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>后羿</td>
-          <td>男</td>
-          <td>2017-12-12 12:12:12</td>
-          <td>
-            <a href="">查看</a>
-            <a href="">编辑</a>
-            <a href="">删除</a>
-          </td>
-        </tr>
+          </tr>
+        <% }) %>
       </tbody>
     </table>
   </div>

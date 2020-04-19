@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hero - Admin</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+  <header>
+    <div class="page-header container">
+      <h1>亡者农药 <small>英雄管理器</small></h1>
+    </div>
+  </header>
+  <div class="container hero-list">
+    <a class="btn btn-success pull-right" href="/add">添加英雄</a>
+    <h4>后端ejs先挖点坑渲染一点,返回给前端: <%= data[0].name + data[0].age%></h4>
+    <h4>前端再发ajax请求数据用template进一步渲染 {{模板id,数据}}</h4>
+    <table class="table table-hover">
+      <thead>
+        <th>编号</th>
+        <th>名称</th>
+        <th>性别</th>
+        <th>年龄</th>
+        <th>手机号</th>
+        <th>地址</th>
+        <th>创建时间</th>
+        <th>操作</th>
+      </thead>
+      <tbody>
+        <!-- 此处没有挖ejs坑, 留给前端-发Ajax请求数据-用template挖坑渲染 !-->
+
+      </tbody>
+    </table>
+  </div>
+  <script src='/node_modules/jquery/dist/jquery.js'></script>
+  <script src='/node_modules/art-template/lib/template-web.js'></script>
+  <script type='text/html' id='heroList'>
+    {{each data}}  
+    <tr>
+      <td>{{$index+1}}</td>
+      <td>{{$value.name}}</td>
+      <td>{{$value.gender}}</td>
+      <td>{{$value.age}}</td>
+      <td>{{$value.phone1}}</td>
+      <td>{{$value.address}}</td>
+      <td>{{$value.ctime}}</td>
+      <td>
+        <a href="">查看</a>
+        <a href="">编辑</a>
+        <a href="">删除</a>
+      </td>
+    </tr>
+    {{/each}}
+  </script>
+  <script>
+    $(function(){
+      $.ajax({
+        type:'get',
+        url:'/getAllHeroInfo',
+        success:function(res){
+          let htmlStr=template('heroList',res);    //如果此处res.data ,模板{{each}}即可
+          console.log(htmlStr);
+          $('tbody').html(htmlStr);
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>
