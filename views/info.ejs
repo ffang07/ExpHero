@@ -1,9 +1,9 @@
 <%- include('./template/header.ejs')%>
   <div class="container hero-list">
-    <p><strong>Id:</strong>{{id}}</p>
-    <p><strong>姓名:</strong>{{name}}</p>
-    <p><strong>性别:</strong>{{gender}}</p>
-    <p><strong>添加时间:</strong>{{ctime}}</p>
+    <p><strong>Id:</strong><%= data[0].id%></p>
+    <p><strong>姓名:</strong><%= data[0].name%></p>
+    <p><strong>性别:</strong><%= data[0].gender%></p>
+    <p><strong>添加时间:</strong><%= data[0].ctime%></p>
   </div>
 </body>
 
