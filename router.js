@@ -33,4 +33,7 @@ router.get('/',(req,res)=>{
 .post('/updateHeroInfo',(req,res)=>{
     heroCtrl.updateHeroInfo(req,res);
 })
+.post('/upload', (req, res) => {    
+    heroCtrl.uploadHeroInfo(req,res);
+  });
 module.exports=router;

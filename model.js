@@ -52,5 +52,12 @@ module.exports={
             if(err) return callback(false);
             callback(true);
         })
+    },
+    uploadHeroData(upl,id,callback){
+        let sql='update heros set photo=? where id=?;'
+        conn.query(sql,[upl,id],(err,result)=>{
+            if (err) return callback(false);
+            callback(true);
+        })
     }
 }

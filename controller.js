@@ -1,5 +1,7 @@
 let heroModel=require('./model');
 const moment=require('moment');
+let formidable = require('formidable');
+// let multiparty = require('multiparty');  //报错
 
 module.exports={
     showIndexPage(req,res){
@@ -82,5 +84,25 @@ module.exports={
             if(!result) return res.json({code:201,msg:'更新失败'})
             res.json({code:200,msg:'更新成功'})
         })
+    },
+    uploadHeroInfo(req,res){
+        const form = formidable({ multiples: true ,uploadDir:'./upload',keepExtensions:true});
+        form.parse(req, (err, fields, files) => {
+            console.log('formidable解析2进制:',err,'非文件数据:',fields,'文件数据:',files);
+          if (err) {
+            next(err);
+            res.json({code:201,msg:'上传失败'});
+            return;
+          }
+        //   console.log(req.body);   //req.body为空{} 
+          let id= fields.id2;
+          let uplpath=files.photo0.path;   //多个图,只取第一个!
+          console.log('打印',id,uplpath);
+          heroModel.uploadHeroData(uplpath,id,(result)=>{
+            if(!result) return res.json({code:202,msg:'上传成功,存库失败'})
+            res.json({code:200,msg:'上传存库成功',data:{ fields, files }});
+          })
+        });
+
     }
 }

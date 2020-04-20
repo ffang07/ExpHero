@@ -1,6 +1,6 @@
 <%- include('header.ejs')%>
   <div class="container hero-list">
-    <form id='form'>
+    <form id='form' >
       <!-- 加个隐藏域 name键名=value值 , 提交表单 会拼接get参值对 -->
       <input type="hidden" name="id" class='id' value='0'>
       <div class="form-group">
@@ -39,6 +39,14 @@
         </div>
       </div>
       <div class="form-group">
+        <label class="col-sm-2 control-label">英雄头像</label>
+        <div class="col-sm-10">
+          <img id='photo' style="width:100px;height:100px;background-color:pink">图1</img>
+          <img id='photo2' style="width:100px;height:100px;background-color:pink">图2</img>
+          <input id='fileupl' type="file" name="photo" class="form-control" value="上传头像"  />
+        </div>
+      </div>
+      <div class="form-group">
         <label class="col-sm-2 control-label">时间</label>
         <!-- <input type="text" disabled='disabled' style='border: 0px;' class="col-sm-10 ctime" value="2017-12-12 12:12:12"></input> -->
         <div class="col-sm-10 time">
@@ -65,18 +73,19 @@
         // console.log('打印啦',res.data[0]);
         if(res.code==200){
           for(var key in res.data[0]){
-            // console.log(key,res.data[0][key])
+            console.log(key,res.data[0][key])
             $('input.'+key).val(res.data[0][key]);   //直接给元素赋值 $('input.键类名').val(值)
-            $('div.time').text(res.data[0].ctime);
-            res.data[0]['gender']=='女'? $('input.woman').prop('checked',true):$('input.man').prop('checked',true) ;
           }
+          $('div.time').text(res.data[0].ctime);
+            res.data[0]['gender']=='女'? $('input.woman').prop('checked',true):$('input.man').prop('checked',true) ;
+          $('#photo').prop('src',res.data[0].photo);
+          $('#photo2').prop('src',res.data[0].photo2);
         }
       }
     })
 
     $('.btn-edt').on('click',function(e) {
         e.preventDefault();
-        console.log($('#form').serialize());
         $.ajax({
           type: 'post',
           url: '/updateHeroInfo',
@@ -89,6 +98,31 @@
           }
         })
       })
+    
+    $('#fileupl').on('change',function(e){
+      // e.preventDefault();
+      // console.log($('#fileupl')[0].files);          //上传多个文件,伪数组
+      console.log(location.search.split('=')[1]);
+      let dataupl= new FormData();
+      let len=$('#fileupl')[0].files.length;
+      for(let i=0;i<len;i++){
+        dataupl.append(`photo${i}`,$('#fileupl')[0].files[i]);
+        console.log('追加2进制文件:',$('#fileupl')[0].files[i])
+      }
+      dataupl.append('id2',location.search.split('=')[1]);
+      dataupl.append('zj','追加到2进制数据');
+      $.post({
+        url:'/upload',
+        data:dataupl,
+        contentType: false,
+        processData: false,
+        success:function(res){
+          if(res.code==200){
+            console.log(res);
+            $('#photo').prop('src',res.data.files.photo0.path);
+          }
+        }
+      })
+    })
   })
 </script>
-
